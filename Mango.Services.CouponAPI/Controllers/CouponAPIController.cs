@@ -5,7 +5,7 @@ using Mango.Services.CouponAPI.Models;
 using Mango.Services.CouponAPI.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mango.Services.CouponAPI.Properties.Controllers
+namespace Mango.Services.CouponAPI.Controllers
 {
     [Route("api/[Controller]")]
     public class CouponAPIController : Controller
@@ -14,7 +14,7 @@ namespace Mango.Services.CouponAPI.Properties.Controllers
         private ResponseDto _response;
         private readonly IMapper _mapper;
 
-        public CouponAPIController(AppDbContext context,IMapper mapper)
+        public CouponAPIController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _response = new ResponseDto();
@@ -28,10 +28,10 @@ namespace Mango.Services.CouponAPI.Properties.Controllers
             try
             {
                 IEnumerable<Coupon> Coupons = _context.Coupons.ToList();
-       
+
                 _response.Result = _mapper.Map<IEnumerable<CouponDto>>(Coupons);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
@@ -65,7 +65,7 @@ namespace Mango.Services.CouponAPI.Properties.Controllers
                 Coupon coupon = _context.Coupons.First(x => x.CouponCode == code);
                 _response.Result = coupon;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
@@ -119,7 +119,7 @@ namespace Mango.Services.CouponAPI.Properties.Controllers
                 _context.Coupons.Remove(coupon);
                 _context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
