@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mango.Services.CouponAPI.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api/coupon")]
     public class CouponAPIController : Controller
     {
         private readonly AppDbContext _context;
@@ -57,7 +57,7 @@ namespace Mango.Services.CouponAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetByCod/{code}")]
+        [Route("GetCouponByCode/{code}")]
         public ResponseDto GetCyCode(string code)
         {
             try
@@ -111,6 +111,7 @@ namespace Mango.Services.CouponAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("delete/{id}")]
         public ResponseDto DeleteCoupon(int id)
         {
             try
